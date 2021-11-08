@@ -26,11 +26,19 @@ export function Counter() {
     clicks: 0,
   });
 
+  useEffect(() => {
+    counterStore.subscribe(() => {
+      console.log('Desde Counter', counterStore.getState());
+      setState(counterStore.getState());
+    });
+  }, []);
+
   const handleChange = (increment) => {
+    console.log('Hecho Click');
     if (increment === 0) {
-      //
+      counterStore.dispatch(actions.resetCounter());
     } else {
-      //
+      counterStore.dispatch(actions.changeCounter(increment));
     }
   };
 
