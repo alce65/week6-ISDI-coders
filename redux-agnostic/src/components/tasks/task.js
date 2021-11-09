@@ -1,8 +1,15 @@
+import { taskStore } from '../../redux/store';
 import './task.css';
+import * as action from '../../redux/tasks/action-creators';
 
 export function Task({ item }) {
-  const toggleCompleteTask = () => {};
-  const deleteTask = () => {};
+  const toggleCompleteTask = () => {
+    taskStore.dispatch(action.toggleTask(item.id));
+  };
+  const deleteTask = () => {
+    taskStore.dispatch(action.deleteTasks(item.id));
+  };
+
   const template = (
     <li className="task-container">
       <input
