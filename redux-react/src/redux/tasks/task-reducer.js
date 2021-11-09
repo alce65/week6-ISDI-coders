@@ -5,6 +5,7 @@ const initialState = {
 };
 
 export const tasksReducer = (state = initialState, action) => {
+  console.log('Usando tasksReducer');
   switch (action.type) {
     case taskActionTypes.load:
       return { ...state, tasks: [...action.tasks] };

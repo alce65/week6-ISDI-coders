@@ -1,50 +1,53 @@
-import { useState, useEffect } from 'react';
-import { counterStore } from '../../redux/store';
+// import { useState, useEffect } from 'react';
+import { useStore, useSelector, useDispatch } from 'react-redux';
 import * as actions from '../../redux/counter/action-creators';
 
 import './counter.css';
 
 export function Counter() {
-  console.log(counterStore);
+  const dispatch = useDispatch();
+  console.log(useStore());
   // dispatch: ƒ dispatch(action)
   // getState: ƒ getState()
   // subscribe: ƒ subscribe(listener)
 
-  /* counterStore.subscribe(() => {
-    console.log('Desde Counter', counterStore.getState());
+  /* store.subscribe(() => {
+    console.log('Desde Counter', store.getState());
   });
 
   useEffect(() => {
-    console.log(counterStore.getState());
-    counterStore.dispatch(actions.changeCounter(1));
-    counterStore.dispatch(actions.changeCounter(1));
-    counterStore.dispatch(actions.changeCounter(1));
+    console.log(store.getState());
+    store.dispatch(actions.changeCounter(1));
+    store.dispatch(actions.changeCounter(1));
+    store.dispatch(actions.changeCounter(1));
   }, []); */
 
-  const [state, setState] = useState({
+  /* const [state, setState] = useState({
     counter: 0,
     clicks: 0,
-  });
+  }); */
 
-  useEffect(() => {
-    counterStore.subscribe(() => {
-      console.log('Desde Counter', counterStore.getState());
-      setState(counterStore.getState());
+  const counterState = useSelector((state) => state.countStore);
+
+  /* useEffect(() => {
+    store.subscribe(() => {
+      console.log('Desde Counter', store.getState());
+      setState(store.getState().countStore);
     });
-  }, []);
+  }, []); */
 
   const handleChange = (increment) => {
     console.log('Hecho Click');
     if (increment === 0) {
-      counterStore.dispatch(actions.resetCounter());
+      dispatch(actions.resetCounter());
     } else {
-      counterStore.dispatch(actions.changeCounter(increment));
+      dispatch(actions.changeCounter(increment));
     }
   };
 
   const template = (
     <>
-      <div className="counter__h3">{state.counter}</div>
+      <div className="counter__h3">{counterState.counter}</div>
       <div className="counter-buttons">
         <button
           type="button"
@@ -68,7 +71,7 @@ export function Counter() {
           Reset
         </button>
       </div>
-      <div className="counter__h3">Clicks: {state.clicks}</div>
+      <div className="counter__h3">Clicks: {counterState.clicks}</div>
     </>
   );
   return template;

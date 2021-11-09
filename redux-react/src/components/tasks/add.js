@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import TaskModel from '../../models/task-model';
-import { taskStore } from '../../redux/store';
+import { store } from '../../redux/store';
 import * as action from '../../redux/tasks/action-creators';
 
 export function Add() {
@@ -8,7 +8,7 @@ export function Add() {
 
   const addTask = (task) => {
     console.log(task);
-    taskStore.dispatch(action.addTask(task));
+    store.dispatch(action.addTask(task));
   };
   const handleChange = (evt, control) => {
     setNewTaskState({ ...newTaskState, [control]: evt.target.value });

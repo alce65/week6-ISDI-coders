@@ -6,20 +6,20 @@ import { Task } from './task';
 
 import './list.css';
 import { TASKS } from '../../models/task.data';
-import { taskStore } from '../../redux/store';
+import { store } from '../../redux/store';
 import * as action from '../../redux/tasks/action-creators';
 
 export function List() {
   const [tasks, setTasks] = useState([]);
 
   useEffect(() => {
-    // console.log(taskStore);
-    // console.log(taskStore.getState());
-    // console.log(taskStore.getState());
-    taskStore.subscribe(() => {
-      setTasks(taskStore.getState().tasks);
+    // console.log(store);
+    // console.log(store.getState());
+    // console.log(store.getState());
+    store.subscribe(() => {
+      setTasks(store.getState().taskStore.tasks);
     });
-    taskStore.dispatch(action.loadTasks(TASKS));
+    store.dispatch(action.loadTasks(TASKS));
   }, []);
 
   /* useEffect(() => {

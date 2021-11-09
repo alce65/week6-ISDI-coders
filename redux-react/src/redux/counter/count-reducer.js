@@ -9,6 +9,7 @@ import { actionTypes } from './action-types';
 const initialState = new CounterModel();
 
 export const countReducer = (state = initialState, action) => {
+  console.log('Usando countReducer');
   switch (action.type) {
     case actionTypes.change:
       return {

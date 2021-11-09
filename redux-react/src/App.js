@@ -6,7 +6,7 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Redux Agnostic</h1>
+        <h1>Redux with react-redux</h1>
         <Counter />
       </header>
       <List />
