@@ -5,7 +5,7 @@ import { Card } from '../core/card';
 import { Add } from './add';
 import { Task } from './task';
 import * as action from '../../redux/tasks/action-creators';
-import { getTasks } from '../../services/http-tasks';
+
 import './list.css';
 
 export function List() {
@@ -14,16 +14,17 @@ export function List() {
   const { tasks } = useSelector((state) => state.taskStore);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    // console.log(store);
-    // console.log(store.getState());
-    // console.log(store.getState());
-    /* store.subscribe(() => {
+  useEffect(
+    () =>
+      // console.log(store);
+      // console.log(store.getState());
+      // console.log(store.getState());
+      /* store.subscribe(() => {
       setTasks(store.getState().taskStore.tasks);
     }); */
-
-    getTasks().then((listTasks) => dispatch(action.loadTasks(listTasks)));
-  }, [dispatch]);
+      dispatch(action.loadTasks()),
+    [dispatch]
+  );
 
   /* useEffect(() => {
     store.getTasks().then((response) => {
@@ -31,6 +32,7 @@ export function List() {
     });
   }, []); */
 
+  console.log(tasks);
   const htmlTasks = tasks.map((item) => <Task key={item.id} item={item} />);
   const template = (
     <div className="tasks-container">

@@ -2,7 +2,6 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import TaskModel from '../../models/task-model';
 import * as action from '../../redux/tasks/action-creators';
-import { setTask } from '../../services/http-tasks';
 
 export function Add() {
   const [newTaskState, setNewTaskState] = useState(new TaskModel());
@@ -10,7 +9,7 @@ export function Add() {
 
   const addTask = (task) => {
     console.log(task);
-    setTask(task).then((addedTask) => dispatch(action.addTask(addedTask)));
+    dispatch(action.addTask(task));
   };
   const handleChange = (evt, control) => {
     setNewTaskState({ ...newTaskState, [control]: evt.target.value });

@@ -1,14 +1,17 @@
-import { createStore, combineReducers } from 'redux';
+/* eslint-disable no-underscore-dangle */
+import { createStore, combineReducers, compose, applyMiddleware } from 'redux';
+import thunk from 'redux-thunk';
 import { countReducer } from './counter/count-reducer';
 import { tasksReducer } from './tasks/task-reducer';
+
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 export const store = createStore(
   combineReducers({
     countStore: countReducer,
     taskStore: tasksReducer,
   }),
-  // eslint-disable-next-line no-underscore-dangle
-  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+  composeEnhancers(applyMiddleware(thunk))
 );
 
 /* Metodos del objeto cevuelto por createStore

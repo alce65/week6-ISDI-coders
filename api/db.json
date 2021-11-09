@@ -23,6 +23,12 @@
       "title": "Crear los endpoints de la API",
       "responsible": "Ramon",
       "isCompleted": false
+    },
+    {
+      "id": 5,
+      "title": "Crear el front",
+      "responsible": "Luis",
+      "isCompleted": false
     }
   ],
   "films": [
