@@ -1,13 +1,22 @@
-import { store } from '../../redux/store';
+import { useDispatch } from 'react-redux';
 import './task.css';
 import * as action from '../../redux/tasks/action-creators';
+import { updateTask, removeTask } from '../../services/http-tasks';
 
 export function Task({ item }) {
+  const dispatch = useDispatch();
+
   const toggleCompleteTask = () => {
-    store.dispatch(action.toggleTask(item.id));
+    updateTask(item).then((taskUpdated) =>
+      dispatch(action.toggleTask(taskUpdated.id))
+    );
   };
   const deleteTask = () => {
-    store.dispatch(action.deleteTasks(item.id));
+    removeTask(item.id).then((resp) => {
+      if (resp.ok) {
+        dispatch(action.deleteTasks(item.id));
+      }
+    });
   };
 
   const template = (

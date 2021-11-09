@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
 import TaskModel from '../../models/task-model';
-import { store } from '../../redux/store';
 import * as action from '../../redux/tasks/action-creators';
+import { setTask } from '../../services/http-tasks';
 
 export function Add() {
   const [newTaskState, setNewTaskState] = useState(new TaskModel());
+  const dispatch = useDispatch();
 
   const addTask = (task) => {
     console.log(task);
-    store.dispatch(action.addTask(task));
+    setTask(task).then((addedTask) => dispatch(action.addTask(addedTask)));
   };
   const handleChange = (evt, control) => {
     setNewTaskState({ ...newTaskState, [control]: evt.target.value });

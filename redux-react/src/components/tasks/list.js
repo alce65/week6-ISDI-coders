@@ -1,26 +1,29 @@
 /* eslint-disable no-param-reassign */
-import { useState, useEffect } from 'react';
+import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { Card } from '../core/card';
 import { Add } from './add';
 import { Task } from './task';
-
-import './list.css';
-import { TASKS } from '../../models/task.data';
-import { store } from '../../redux/store';
 import * as action from '../../redux/tasks/action-creators';
+import { getTasks } from '../../services/http-tasks';
+import './list.css';
 
 export function List() {
-  const [tasks, setTasks] = useState([]);
+  // const [tasks, setTasks] = useState([]);
+
+  const { tasks } = useSelector((state) => state.taskStore);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // console.log(store);
     // console.log(store.getState());
     // console.log(store.getState());
-    store.subscribe(() => {
+    /* store.subscribe(() => {
       setTasks(store.getState().taskStore.tasks);
-    });
-    store.dispatch(action.loadTasks(TASKS));
-  }, []);
+    }); */
+
+    getTasks().then((listTasks) => dispatch(action.loadTasks(listTasks)));
+  }, [dispatch]);
 
   /* useEffect(() => {
     store.getTasks().then((response) => {
