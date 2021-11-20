@@ -35,7 +35,20 @@
     {
       "id": 1,
       "title": "Blade Runner",
+      "year": "1982",
       "watched": true
+    },
+    {
+      "id": 2,
+      "title": "Matrix",
+      "year": "1999",
+      "watched": false
+    },
+    {
+      "id": 3,
+      "title": "X-Men",
+      "year": "2000",
+      "isWatch": false
     }
   ],
   "posts": [
